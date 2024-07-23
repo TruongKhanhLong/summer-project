@@ -21,7 +21,7 @@ class AuthService extends ServiceBase
     {
         $user = User::query()->where('email', '=', $data['email'])->first();
 
-        if (!$user || !Hash::check($data['password'], Hash::make($user->password))) {
+        if (!$user || !Hash::check($data['password'], $user->password)) {
             throw new InputException('login_fail');
         }
 
@@ -47,8 +47,6 @@ class AuthService extends ServiceBase
             'name' => $data['name'],
             'email' => Str::lower($data['email']),
             'password' => Hash::make($data['password']),
-            'company_id' => $data['company_id'],
-            'status' => User::STATUS_ACTIVE,
         ]);
 
         if (!$newUser) {

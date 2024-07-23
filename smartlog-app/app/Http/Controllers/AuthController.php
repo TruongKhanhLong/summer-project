@@ -75,4 +75,12 @@ class AuthController extends Controller
     {
         RateLimiter::clear($key);
     }
+
+    public function register(Request $request): JsonResponse
+    {
+        $inputs = $request->only(['name', 'email', 'password']);
+        $user = AuthService::getInstance()->register($inputs);
+
+        return response()->json($user);
+    }
 }
