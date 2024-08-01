@@ -49,10 +49,6 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged out successfully']);
     }
 
-    protected function sendSuccessResponse(array $data): JsonResponse
-    {
-        return response()->json($data);
-    }
 
     protected function sendFailedLoginResponse(): JsonResponse
     {
